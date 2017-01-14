@@ -1,0 +1,28 @@
+{
+  "name": "cgs-gateway",
+  "version": "1.0.0",
+  "description": "This is a restful api for provide interface to database operations",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "mocha"
+  },
+  "keywords": [
+    "api",
+    "gateway"
+  ],
+  "author": "Renan Danton",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "express-myconnection": "^1.0.4",
+    "express-redis-cache": "^0.5.0",
+    "md5": "^2.2.1",
+    "mysql": "^2.12.0",
+    "redis": "^2.6.3"
+  },
+  "devDependencies": {
+    "mocha": "^3.2.0"
+  }
+}

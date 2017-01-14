@@ -1,0 +1,30 @@
+version: '2'
+services:
+  api:
+    build: .
+    restart: always
+    depends_on:
+      - mysql
+      - redis
+    ports:
+      - "8883:3000"
+    volumes:
+      - ${PWD}:/usr/src/cgs-gateway
+    links:
+      - mysql
+      - redis
+
+  mysql:
+    image: mysql:5.6
+    restart: always
+    ports:
+      - "3309:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=my_database
+
+  redis:
+    image: redis:latest
+    restart: always
+    ports:
+      - "6380:6379"
