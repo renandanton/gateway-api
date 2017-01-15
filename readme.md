@@ -1,10 +1,10 @@
 # GATEWAY API
 
-This is a api for provide database operations for another apis.
+This is a restful api for provide database operations for another apis.
 
 ## Description
 
-Api gateway consists of an abstraction to avoid direct request in the database instead of all of the micro services dispatch a request from api gateway provide information and database operations. The idea was inspired in elasticsearch however it was developed to use relational databases like mysql, postgresql and others.
+Api gateway consists in a abstraction to avoid direct request in database instead all micro services dispatch a request for api gateway provide database informations and operations. The idea was inspired in elasticsearch however it was developed to use relational databases like mysql, postgresql and others.
 
 ## Requeriments
 
@@ -85,7 +85,7 @@ Api gateway provide routes to access database operations using http verbs based 
 | UPDATE        | PUT      |  /cgs/gateway/_update  |
 | DELETE        | DELETE   |  /cgs/gateway/_delete  |
 
-Insert records in database table via api gateway:
+### Insert records in database table via api gateway:
 
 ``` curl
 curl -H "Content-Type: application/json" -X POST -d '{"insert": {"table": "users","into": ["name","msisdn","password","email","role_id","language_id"],"values": [["Renan","13213232","ADAFDSFA3923AS232112334",	"renan@teste.com.br",1,1], ["Jessyca","78968965","OI32O34PI23JO3KLIOJ","jessyca@teste.com.br",2,2]	]}}' http://localhost:3000/cgs/gateway/_insert
@@ -98,12 +98,12 @@ Json body data example:
 	"insert": {
 		"table": "table0",
 		"into": [
-			"column0",
 			"column1",
 			"column2",
 			"column3",
 			"column4",
-			"column5"
+			"column5",
+			"column6"
 		],
 		"values": [
 			[
@@ -127,7 +127,13 @@ Json body data example:
 	}
 }
 ```
-Update records in database table via api gateway:
+
+SQL Output:
+```  sql
+ INSERT INTO table0 (column1, column2, column3, column4, column5, column6) VALUES  ("value1","value2","value3","value4",1,2), ("value1","value2","value3","value4",3,2)  
+```
+
+### Update records in database table via api gateway:
 
 ``` curl
 curl -H "Content-Type: application/json" -X PUT -d  '{"update": {"table": "users","set": {"name": "Renan Danton de souza XXX","msisdn": "13213232","password": "123456789","email": "renandanton@teste.com.br","role_id": 1,"language_id": 2},"where": {"id": 30}}}'  http://localhost:3000/cgs/gateway/_update
@@ -148,16 +154,21 @@ Json body data example:
 			"field6": 2
 		},
 		"where": {
-			"id": 30
+			"id": 21
 		}
 	}
 }
 ```
 
-Delete records in database table via api gateway:
+SQL Output:
+```  sql
+ UPDATE table0 SET field1="value1", field2="value2", field3="value3", field4="value4@teste.com.br", field5=1, field6=2 WHERE id = 21
+```
+
+### Delete records in database table via api gateway:
 
 ``` curl
-curl -H "Content-Type: application/json" -X DELETE -d '{"delete": {"from": "users","where": {"id": 41}}}' http://localhost:3000/cgs/gateway/_delete
+curl -H "Content-Type: application/json" -X DELETE -d '{"delete": {"from": "users","where": {"id": 47}}}' http://localhost:3000/cgs/gateway/_delete
 ```
 
 Json body data example:
@@ -173,12 +184,17 @@ Json body data example:
 }
 ```
 
+SQL Output:
+```  sql
+ DELETE FROM users WHERE id = 47
+```
 
-Do queries in api gateway:
+### Do queries in api gateway:
 
 ```curl
 curl -H "Content-Type: application/json" -X POST -d  '{"query": {"select": ["name","email","created_at","updated_at"], "from": "users","where": {"id": 10}}}' http://localhost:3000/cgs/gateway/_search
 ```
+
 
 Json body data example:
 
@@ -191,7 +207,7 @@ Json body data example:
             "created_at",
             "updated_at"
         ],
-        "from": "table0",
+        "from": "users",
         "where": {
             "id": 30
         }
@@ -199,7 +215,247 @@ Json body data example:
 }
 ```
 
-Creating JSQL using  ***inner joins***:
+SQL Output:
+```  sql
+ SELECT name, email, created_at, updated_at FROM users WHERE id = 30
+```
+
+- Creating JSQL using ***where operator equal to***:
+
+``` json
+"where": {
+   "name": "myname"
+}
+```
+
+SQL Output:
+```  sql
+ WHERE name = 'myname'
+```
+
+``` json
+"where": {
+    "eq": {
+     "name": "myname"
+    }
+}
+```
+
+SQL Output:
+```  sql
+ WHERE name = 'myname'
+```
+
+- Creating JSQL using ***where operator great than***:
+
+``` json
+"where": {
+	"gt": {
+	   "id": 15
+	}  
+}
+```
+
+SQL Output:
+```  sql
+ WHERE id > 20
+```
+
+- Creating JSQL using ***where operator great than or equal to***:
+
+``` json
+"where": {
+	"gte": {
+	   "id": 19
+	}  
+}
+```
+
+SQL Output:
+```  sql
+ WHERE id >= 19
+```
+
+- Creating JSQL using ***where operator less than***:
+
+``` json
+"where": {
+	"lt": {
+	   "id": 17
+	}  
+}
+```
+
+SQL Output:
+```  sql
+ WHERE id < 17
+```
+
+- Creating JSQL using ***where operator less than or equal to***:
+
+``` json
+"where": {
+	"lte": {
+	   "id": 19
+	}  
+}
+```
+
+SQL Output:
+```  sql
+ WHERE id <= 19
+```
+
+- Creating JSQL using ***where and operator***:
+
+``` json
+"where": {
+    "eq": {
+     "name": "myname"
+    },
+    "operator": "And",
+    "eq": {
+     "email": "myemail@example.com"
+    }
+}
+```
+
+SQL Output:
+```  sql
+ WHERE name='myname' and email='myemail@example.com'
+```
+
+- Creating JSQL using ***where or operator***:
+
+``` json
+"where": {
+    "eq": {
+     "name": "myname"
+    },
+    "operator": "Or",
+    "eq": {
+     "name": "yourname"
+    }
+}
+```
+
+SQL Output:
+```  sql
+ WHERE name='myname' or name='yourname'
+```
+
+- Creating JSQL using ***order by***:
+
+``` json
+"order": {
+    "id": "DESC",
+    "name": "ASC"
+}
+```
+
+SQL Output:
+```  sql
+ ORDER BY id DESC, name ASC
+```
+
+- Creating JSQL using ***limit***:
+
+``` json
+"limit": 5
+```
+
+SQL Output:
+```  sql
+ LIMIT 5
+```
+
+- Creating JSQL using ***where in***:
+
+``` json
+"where": {
+            "in": {
+	            "id": [20,30]
+            }
+        }
+```
+
+SQL Output:
+```  sql
+ WHERE id IN (20,30)
+```
+
+``` json
+"where": {
+            "in": {
+	            "name": ["Name1", "Name2"]
+            }
+        }
+```
+
+SQL Output:
+```  sql
+ WHERE id IN ("Name1", "Name2")
+```
+
+- Creating JSQL using ***where not in***:
+
+``` json
+"where": {
+            "nin": {
+	            "id": [20,30]
+            }
+        }
+```
+
+SQL Output:
+```  sql
+ WHERE id NOT IN (20, 30)
+```
+
+``` json
+"where": {
+            "nin": {
+	            "name": ["Name1", "Name2"]
+            }
+        }
+```
+
+SQL Output:
+```  sql
+ WHERE id NOT IN ("Name1", "Name2")
+```
+
+- Creating JSQL using ***where between***:
+
+``` json
+"where": {
+            "between": {
+	            "id": [20,30]
+            }
+        }
+```
+
+SQL Output:
+```  sql
+ WHERE id BETWEEN 20 AND 30
+```
+
+- Creating JSQL using ***where like ***:
+
+``` json
+"where": {
+			"like": {
+				"name": "%na%"
+			}
+		}
+```
+
+SQL Output:
+```  sql
+ WHERE name LIKE "%na%"
+```
+
+- Creating JSQL using  ***inner joins***:
 
 ```json
 {
@@ -226,14 +482,22 @@ Creating JSQL using  ***inner joins***:
 	}
 }
 ```
-Creating JSQL using  ***group by*** and ***having***:
+
+SQL Output:
+```  sql
+ SELECT u.name AS nome, u.msisdn AS telefone, p.photo AS foto, mt.meta AS objetivo
+ FROM users AS u
+ INNER JOIN  profiles AS p ON p.user_id=u.id
+ INNER JOIN meta AS mt ON mt.id=p.meta_id
+```
+- Creating JSQL using  ***group by*** and ***having***:
 
 ``` json
 {
 	"query": {
 		"select": [
 			"r.name as role",
-			"count(u.id) as total_role"
+			"COUNT(u.id) as total_role"
 		],
 		"from": "users as u",
 		"joins": [
@@ -248,12 +512,23 @@ Creating JSQL using  ***group by*** and ***having***:
 		],
 		"having": {
 			"gte": {
-				"count(u.id)": 6
+				"COUNT(u.id)": 6
 			}
 		}
 	}
 }
 ```
+
+SQL Output:
+```  sql
+ SELECT r.name AS role, COUNT(u.id) AS total_role,
+ FROM users AS u
+ INNER JOIN  roles AS r ON r.id=u.role_id
+ GROUP BY u.role_id
+ HAVING COUNT(u.id) >= 6
+```
+
+### Disabled Redis Caching
 
 For disable caching in a single request, you must send a property in header called ***cached*** with value equals to ***false*** like this:
 
