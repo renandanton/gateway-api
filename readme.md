@@ -1,44 +1,74 @@
-# CGS GATEWAY API
+# GATEWAY API
 
-This is a restful api for provide database operations for another apis.
+This is a api for provide database operations for another apis.
 
-## Descrpition
+## Description
 
-The CGS Gateway is a project that is developing by e-Motion and consists to abstract direct request in database instead all micro services dispatch a request for api gateway provide database informations and operations.
+Api gateway consists of an abstraction to avoid direct request in the database instead of all of the micro services dispatch a request from api gateway provide information and database operations. The idea was inspired in elasticsearch however it was developed to use relational databases like mysql, postgresql and others.
 
 ## Requeriments
 
 You need install this softwares in your computer.
 
-    $ node v6.6.0
+    $ node v6.6.0 or higher
 
     $ npm 3.10.3
 
+    $ mysql 5.6
+
+    $ redis 3.0
+
     $ git client
 
-    $ redis
 
-I suggest you use [docker](https://docs.docker.com/engine/installation/) and [docker-composer](https://docs.docker.com/compose/install/) with this image [redis](https://hub.docker.com/r/library/redis/)
+## Docker Installation
 
-    $ docker pull redis
+I suggest you use [docker](https://docs.docker.com/engine/installation/) and [docker-composer](https://docs.docker.com/compose/install/)  and then execute this instructions:
 
-## Installation
+
+    $ git clone git@github.com:renandanton/gateway-api.git
+
+    $ cd gateway-api
+
+    $ docker-compose up -d
+
+that's all, your gateway api is ready for use.
+
+
+## Manual Installation
+
 
 Clone the repository project:
 
-    $ git clone git@bitbucket.org:erik-borges/cgs-gateway.git
+    $ git clone git@github.com:renandanton/gateway-api.git
 
 Enter in project directory,
 
-    $ cd cgs-gateway
+    $ cd gateway-api
 
 And then execute:
 
     $ npm install
 
-Now, create database and run the migrations into database:
+Now, change mysql configuration file  in ***config/adpters/mysql.js***:
 
-    $ npm run migrate
+``` javascript
+var mysqlOptions = {
+  host: 'mysql',
+  port: 3306,
+  user: 'root',
+  password: 'root',
+  database: 'my_database'
+};
+```
+Do same thing in redis configuration file in ***config/adapters/redis.js ***
+
+``` javascript
+var redisOptions = {
+  host: 'redis',
+  port: 6379
+};
+```
 
 and finally run the web server:
 
@@ -231,10 +261,11 @@ For disable caching in a single request, you must send a property in header call
 curl -H "Content-Type: application/json" -H "cached: false" -X POST -d  '{"query": {"select": ["name","email","created_at","updated_at"], "from": "users","where": {"id": 10}}}' http://localhost:3000/cgs/gateway/_search
 ```
 
-## Other Infos
+## Contributing
 
- Workbench Model [MacroSky.mwb](https://drive.google.com/open?id=0B9gPInimLaMUdlVLZWlxQ09mZE0)
+Bug reports and pull requests are welcome on GitHub at https://github.com/renandanton/gateway-api. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
-## Copyright
 
-This is a private repository under emotion [copyright](http://emotion.digital/).
+## License
+
+The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
