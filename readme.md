@@ -96,7 +96,7 @@ Json body data example:
 ``` json
 {
 	"insert": {
-		"table": "table0",
+		"table": "table",
 		"into": [
 			"column1",
 			"column2",
@@ -130,7 +130,7 @@ Json body data example:
 
 SQL Output:
 ```  sql
- INSERT INTO table0 (column1, column2, column3, column4, column5, column6) VALUES  ("value1","value2","value3","value4",1,2), ("value1","value2","value3","value4",3,2)  
+ INSERT INTO table (column1, column2, column3, column4, column5, column6) VALUES  ("value1","value2","value3","value4",1,2), ("value1","value2","value3","value4",3,2)  
 ```
 
 ### Update records in database table via api gateway:
@@ -144,7 +144,7 @@ Json body data example:
 ``` json
 {
 	"update": {
-		"table": "table0",
+		"table": "table",
 		"set": {
 			"field1": "value1",
 			"field2": "value2",
@@ -162,7 +162,7 @@ Json body data example:
 
 SQL Output:
 ```  sql
- UPDATE table0 SET field1="value1", field2="value2", field3="value3", field4="value4@teste.com.br", field5=1, field6=2 WHERE id = 21
+ UPDATE table SET field1="value1", field2="value2", field3="value3", field4="value4@teste.com.br", field5=1, field6=2 WHERE id = 21
 ```
 
 ### Delete records in database table via api gateway:
