@@ -1,6 +1,8 @@
 var factorySelect = require('./../factories/select');
 var factoryFrom = require('./../factories/from');
 var factoryJoins = require('./../factories/joins');
+var factoryLeftJoins = require('./../factories/leftjoins');
+var factoryRightJoins = require('./../factories/rightjoins');
 var factoryGroup = require('./../factories/group');
 var factoryHaving = require('./../factories/having');
 var factoryWhere = require('./../factories/where');
@@ -18,6 +20,8 @@ var Service = function (req, res, next) {
     var select = query.select;
     var from = query.from;
     var joins = query.joins;
+    var leftjoins = query.leftjoins;
+    var rightjoins = query.rightjoins;
     var group = query.group;
     var having = query.having;
     var where = query.where;
@@ -31,6 +35,8 @@ var Service = function (req, res, next) {
     sql += factoryFrom.parse(from);
 
     if (joins) sql += factoryJoins.parse(joins);
+    if (leftjoins) sql += factoryLeftJoins.parse(leftjoins);
+    if (rightjoins) sql += factoryRightJoins.parse(rightjoins);
     if (group) sql += factoryGroup.parse(group);
     if (having) sql += factoryHaving.parse(having);
     if (where) sql += factoryWhere.parse(where);
