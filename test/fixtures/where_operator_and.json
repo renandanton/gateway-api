@@ -1,0 +1,7 @@
+{
+  "where": {
+    "id": 1,
+    "operator": "And",
+    "name": "myname"
+  }
+}

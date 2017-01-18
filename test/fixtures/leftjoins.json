@@ -1,0 +1,9 @@
+{
+	"leftjoins": [
+		{
+			"signatures as s": {
+				"on": "s.user_id=u.id"
+			}
+		}
+	]
+}
