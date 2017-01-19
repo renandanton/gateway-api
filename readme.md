@@ -95,36 +95,35 @@ Json body data example:
 
 ``` json
 {
-"insert": {
-"table": "table0",
-"into": [
-"column1",
-"column2",
-"column3",
-"column4",
-"column5",
-"column6"
-],
-"values": [
-[
-"value1",
-"value2",
-"value3",
-"value4",
-1,
-2
-
-],
-[
-"value1",
-"value2",
-"value3",
-"value4",
-3,
-2
-]
-]
-}
+    "insert": {
+    "table": "table0",
+    "into": [
+        "column1",
+        "column2",
+        "column3",
+        "column4",
+        "column5",
+        "column6"
+    ],
+    "values": [
+        [
+            "value1",
+            "value2",
+            "value3",
+            "value4",
+            1,
+            2
+        ],
+        [
+            "value1",
+            "value2",
+            "value3",
+            "value4",
+            3,
+            2
+        ]
+    ]
+    }
 }
 ```
 
@@ -143,20 +142,20 @@ Json body data example:
 
 ``` json
 {
-"update": {
-"table": "table0",
-"set": {
-"field1": "value1",
-"field2": "value2",
-"field3": "value3",
-"field4": "value4@teste.com.br",
-"field5": 1,
-"field6": 2
-},
-"where": {
-"id": 21
-}
-}
+    "update": {
+        "table": "table0",
+        "set": {
+            "field1": "value1",
+            "field2": "value2",
+            "field3": "value3",
+            "field4": "value4@teste.com.br",
+            "field5": 1,
+            "field6": 2
+        },
+        "where": {
+            "id": 21
+        }
+    }
 }
 ```
 
@@ -175,12 +174,12 @@ Json body data example:
 
 ``` json
 {
-"delete": {
-"from": "users",
-"where": {
-"id": 47
-}
-}
+    "delete": {
+        "from": "users",
+        "where": {
+            "id": 47
+        }
+    }
 }
 ```
 
@@ -200,18 +199,18 @@ Json body data example:
 
 ``` json
 {   
-"query": {
-"select": [
-  "name",
-  "email",
-  "created_at",
-  "updated_at"
-],
-"from": "users",
-"where": {
-  "id": 30
-}
-}
+    "query": {
+        "select": [
+          "name",
+          "email",
+          "created_at",
+          "updated_at"
+        ],
+        "from": "users",
+        "where": {
+          "id": 30
+        }
+    }
 }
 ```
 
@@ -223,8 +222,10 @@ SELECT name, email, created_at, updated_at FROM users WHERE id = 30
 - Creating JSQL using ***where operator equal to***:
 
 ``` json
-"where": {
-"name": "myname"
+{
+    "where": {
+        "name": "myname"
+    }
 }
 ```
 
@@ -234,10 +235,12 @@ WHERE name = 'myname'
 ```
 
 ``` json
-"where": {
-"eq": {
-"name": "myname"
-}
+{
+    "where": {
+        "eq": {
+            "name": "myname"
+        }
+    }
 }
 ```
 
@@ -249,10 +252,12 @@ WHERE name = 'myname'
 - Creating JSQL using ***where operator great than***:
 
 ``` json
-"where": {
-"gt": {
-"id": 15
-}  
+{
+    "where": {
+        "gt": {
+            "id": 15
+        }  
+    }
 }
 ```
 
@@ -264,10 +269,12 @@ WHERE id > 20
 - Creating JSQL using ***where operator great than or equal to***:
 
 ``` json
-"where": {
-"gte": {
-"id": 19
-}  
+{
+    "where": {
+        "gte": {
+            "id": 19
+        }  
+    }
 }
 ```
 
@@ -279,10 +286,12 @@ WHERE id >= 19
 - Creating JSQL using ***where operator less than***:
 
 ``` json
-"where": {
-"lt": {
-"id": 17
-}  
+{
+    "where": {
+        "lt": {
+            "id": 17
+        }  
+    }
 }
 ```
 
@@ -294,10 +303,12 @@ WHERE id < 17
 - Creating JSQL using ***where operator less than or equal to***:
 
 ``` json
-"where": {
-"lte": {
-"id": 19
-}  
+{
+    "where": {
+        "lte": {
+            "id": 19
+        }  
+    }
 }
 ```
 
@@ -309,14 +320,16 @@ WHERE id <= 19
 - Creating JSQL using ***where and operator***:
 
 ``` json
-"where": {
-"eq": {
-"name": "myname"
-},
-"operator": "And",
-"eq": {
-"email": "myemail@example.com"
-}
+{
+    "where": {
+        "eq": {
+            "name": "myname"
+        },
+        "operator": "And",
+        "eq": {
+            "email": "myemail@example.com"
+        }
+    }
 }
 ```
 
@@ -328,14 +341,16 @@ WHERE name='myname' and email='myemail@example.com'
 - Creating JSQL using ***where or operator***:
 
 ``` json
-"where": {
-"eq": {
-"name": "myname"
-},
-"operator": "Or",
-"eq": {
-"name": "yourname"
-}
+{
+    "where": {
+        "eq": {
+            "name": "myname"
+        },
+        "operator": "Or",
+        "eq": {
+            "name": "yourname"
+        }
+    }
 }
 ```
 
@@ -347,9 +362,11 @@ WHERE name='myname' or name='yourname'
 - Creating JSQL using ***order by***:
 
 ``` json
-"order": {
-"id": "DESC",
-"name": "ASC"
+{
+    "order": {
+        "id": "DESC",
+        "name": "ASC"
+    }
 }
 ```
 
@@ -361,7 +378,9 @@ ORDER BY id DESC, name ASC
 - Creating JSQL using ***limit***:
 
 ``` json
-"limit": 5
+{
+    "limit": 5
+}
 ```
 
 SQL Output:
@@ -372,10 +391,12 @@ LIMIT 5
 - Creating JSQL using ***where in***:
 
 ``` json
-"where": {
-  "in": {
-    "id": [20,30]
-  }
+{
+    "where": {
+      "in": {
+        "id": [20,30]
+      }
+    }
 }
 ```
 
@@ -385,10 +406,12 @@ WHERE id IN (20,30)
 ```
 
 ``` json
-"where": {
-  "in": {
-    "name": ["Name1", "Name2"]
-  }
+{
+    "where": {
+      "in": {
+        "name": ["Name1", "Name2"]
+      }
+    }
 }
 ```
 
@@ -400,10 +423,12 @@ WHERE id IN ("Name1", "Name2")
 - Creating JSQL using ***where not in***:
 
 ``` json
-"where": {
-  "nin": {
-    "id": [20,30]
-  }
+{
+    "where": {
+      "nin": {
+        "id": [20,30]
+      }
+    }
 }
 ```
 
@@ -413,10 +438,12 @@ WHERE id NOT IN (20, 30)
 ```
 
 ``` json
-"where": {
-  "nin": {
-    "name": ["Name1", "Name2"]
-  }
+{
+    "where": {
+     "nin": {
+        "name": ["Name1", "Name2"]
+      }
+    }
 }
 ```
 
@@ -428,10 +455,12 @@ WHERE id NOT IN ("Name1", "Name2")
 - Creating JSQL using ***where between***:
 
 ``` json
-"where": {
-  "between": {
-    "id": [20,30]
-  }
+{
+    "where": {
+      "between": {
+        "id": [20,30]
+      }
+    }
 }
 ```
 
@@ -443,10 +472,12 @@ WHERE id BETWEEN 20 AND 30
 - Creating JSQL using ***where like***:
 
 ``` json
-"where": {
-"like": {
-"name": "%na%"
-}
+{
+    "where": {
+        "like": {
+            "name": "%na%"
+        }
+    }
 }
 ```
 
@@ -460,26 +491,26 @@ WHERE name LIKE "%na%"
 ```json
 {
 "query": {
-"select": [
-"u.name as nome",
-"u.msisdn as telefone",
-"p.photo as foto",
-"mt.meta as objetivo"
-],
-"from": "users as u",
-"joins": [
-{
-"profiles as p": {
-"on": "p.user_id=u.id"
-}
-},
-{
-"metas as mt": {
-"on": "mt.id=p.meta_id"
-}
-}
-]
-}
+    "select": [
+        "u.name as nome",
+        "u.msisdn as telefone",
+        "p.photo as foto",
+        "mt.meta as objetivo"
+    ],
+    "from": "users as u",
+    "joins": [
+        {
+            "profiles as p": {
+                "on": "p.user_id=u.id"
+            }
+        },
+        {
+            "metas as mt": {
+                "on": "mt.id=p.meta_id"
+            }
+        }
+    ]
+  }
 }
 ```
 
@@ -549,28 +580,28 @@ SELECT u.name,u.email,u.msisdn FROM users as u RIGHT JOIN signatures as s on s.u
 
 ``` json
 {
-"query": {
-"select": [
-"r.name as role",
-"COUNT(u.id) as total_role"
-],
-"from": "users as u",
-"joins": [
-{
-"roles as r": {
-"on": "r.id=u.role_id"
-}
-}
-],
-"group": [
-"u.role_id"
-],
-"having": {
-"gte": {
-"COUNT(u.id)": 6
-}
-}
-}
+  "query": {
+    "select": [
+        "r.name as role",
+        "COUNT(u.id) as total_role"
+    ],
+    "from": "users as u",
+    "joins": [
+        {
+            "roles as r": {
+                "on": "r.id=u.role_id"
+            }
+        }
+    ],
+    "group": [
+        "u.role_id"
+    ],
+    "having": {
+        "gte": {
+            "COUNT(u.id)": 6
+        }
+    }
+  }
 }
 ```
 
@@ -582,6 +613,12 @@ INNER JOIN  roles AS r ON r.id=u.role_id
 GROUP BY u.role_id
 HAVING COUNT(u.id) >= 6
 ```
+
+## Testing
+
+If you want run tests in api gateway type this command:
+
+  $ npm test
 
 ## Contributing
 
