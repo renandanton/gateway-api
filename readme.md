@@ -618,7 +618,9 @@ HAVING COUNT(u.id) >= 6
 
 If you want run tests in api gateway type this command:
 
+``` bash
   $ npm test
+```
 
 ## Contributing
 

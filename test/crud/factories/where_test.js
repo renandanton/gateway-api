@@ -28,40 +28,51 @@ var fixture_nin = require('./../../fixtures/nin');
 var expect = require('chai').expect;
 
 describe('WHERE', function() {
+  describe('EQUAL TO', function () {
+    it('expect to return a where attribute sql string', function() {
+      var sql = factory.parse(fixture_where.where);
+      expect(sql).to.equal(expected_where);
+    });
 
-  it('expect to return a where attribute sql string', function() {
-    var sql = factory.parse(fixture_where.where);
-    expect(sql).to.equal(expected_where);
+    it('expect to return a where equal attribute sql string', function() {
+      var sql = factory.parse(fixture_where_eq.where);
+      expect(sql).to.equal(expected_where_eq);
+    });
   });
 
-  it('expect to return a where equal attribute sql string', function() {
-    var sql = factory.parse(fixture_where_eq.where);
-    expect(sql).to.equal(expected_where_eq);
+  describe('NOT EQUAL', function () {
+    it('expect to return a where not equal attribute sql string', function() {
+      var sql = factory.parse(fixture_where_neq.where);
+      expect(sql).to.equal(expected_where_neq);
+    });
   });
 
-  it('expect to return a where not equal attribute sql string', function() {
-    var sql = factory.parse(fixture_where_neq.where);
-    expect(sql).to.equal(expected_where_neq);
+  describe('GREAT THEN', function () {
+    it('expect to return a where great than attribute sql string', function() {
+      var sql = factory.parse(fixture_where_gt.where);
+      expect(sql).to.equal(expected_where_gt);
+    });
   });
 
-  it('expect to return a where great than attribute sql string', function() {
-    var sql = factory.parse(fixture_where_gt.where);
-    expect(sql).to.equal(expected_where_gt);
+  describe('LESS THEN', function () {
+    it('expect to return a where less than attribute sql string', function() {
+      var sql = factory.parse(fixture_where_lt.where);
+      expect(sql).to.equal(expected_where_lt);
+    });
   });
 
-  it('expect to return a where great than or equal attribute sql string', function() {
-    var sql = factory.parse(fixture_where_gte.where);
-    expect(sql).to.equal(expected_where_gte);
+  describe('GREAT AND EQUAL', function () {
+    it('expect to return a where great than or equal attribute sql string', function() {
+      var sql = factory.parse(fixture_where_gte.where);
+      expect(sql).to.equal(expected_where_gte);
+    });
   });
 
-  it('expect to return a where less than attribute sql string', function() {
-    var sql = factory.parse(fixture_where_lt.where);
-    expect(sql).to.equal(expected_where_lt);
-  });
-
-  it('expect to return a where less than or equal attribute sql string', function() {
-    var sql = factory.parse(fixture_where_lte.where);
-    expect(sql).to.equal(expected_where_lte);
+  describe('LESS AND EQUAL', function () {
+    it('expect to return a where less than or equal attribute sql string', function() {
+      var sql = factory.parse(fixture_where_lte.where);
+      expect(sql).to.equal(expected_where_lte);
+    });
   });
 
   describe('AND', function () {
