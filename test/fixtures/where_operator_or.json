@@ -1,7 +1,13 @@
 {
-  "where": {
-    "id": 1,
-    "operator": "Or",
-    "name": "myname"
-  }
+  "where": [
+    {
+      "id": 1
+    },
+    {
+      "$operator": "Or"
+    },
+    {
+      "name": "myname"
+    }
+  ]
 }

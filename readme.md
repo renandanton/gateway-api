@@ -152,9 +152,11 @@ Json body data example:
             "field5": 1,
             "field6": 2
         },
-        "where": {
-            "id": 21
-        }
+        "where": [
+	        {
+	            "id": 21
+	        }
+        ]
     }
 }
 ```
@@ -176,9 +178,11 @@ Json body data example:
 {
     "delete": {
         "from": "users",
-        "where": {
-            "id": 47
-        }
+        "where": [
+	        {
+	            "id": 47
+	        }
+        ]
     }
 }
 ```
@@ -207,9 +211,11 @@ Json body data example:
           "updated_at"
         ],
         "from": "users",
-        "where": {
-          "id": 30
-        }
+        "where": [
+	        {
+	          "id": 30
+	        }
+        ]
     }
 }
 ```
@@ -223,9 +229,11 @@ SELECT name, email, created_at, updated_at FROM users WHERE id = 30
 
 ``` json
 {
-    "where": {
-        "name": "myname"
-    }
+    "where": [
+	    {
+	        "name": "myname"
+        }
+    ]
 }
 ```
 
@@ -236,11 +244,13 @@ WHERE name = 'myname'
 
 ``` json
 {
-    "where": {
-        "eq": {
-            "name": "myname"
+    "where": [
+	    {
+	        "eq": {
+	            "name": "myname"
+	        }
         }
-    }
+    ]
 }
 ```
 
@@ -253,11 +263,13 @@ WHERE name = 'myname'
 
 ``` json
 {
-    "where": {
-        "gt": {
-            "id": 15
+    "where": [
+	    {
+	        "gt": {
+	            "id": 15
+	        }
         }  
-    }
+    ]
 }
 ```
 
@@ -270,11 +282,13 @@ WHERE id > 20
 
 ``` json
 {
-    "where": {
-        "gte": {
-            "id": 19
+    "where": [
+	    {
+	        "gte": {
+	            "id": 19
+	        }
         }  
-    }
+    ]
 }
 ```
 
@@ -287,11 +301,13 @@ WHERE id >= 19
 
 ``` json
 {
-    "where": {
-        "lt": {
-            "id": 17
+    "where": [
+	    {
+	        "lt": {
+	            "id": 17
+	        }
         }  
-    }
+    ]
 }
 ```
 
@@ -304,11 +320,13 @@ WHERE id < 17
 
 ``` json
 {
-    "where": {
-        "lte": {
-            "id": 19
+    "where": [
+	    {
+	        "lte": {
+	            "id": 19
+	        }
         }  
-    }
+    ]
 }
 ```
 
@@ -321,15 +339,21 @@ WHERE id <= 19
 
 ``` json
 {
-    "where": {
-        "eq": {
-            "name": "myname"
+    "where": [
+	    {
+	        "eq": {
+	            "name": "myname"
+	        }
         },
-        "operator": "And",
-        "eq": {
-            "email": "myemail@example.com"
+        {
+	        "operator": "And"
+	    },
+	    {
+	        "eq": {
+	            "email": "myemail@example.com"
+	        }
         }
-    }
+    ]
 }
 ```
 
@@ -342,15 +366,21 @@ WHERE name='myname' and email='myemail@example.com'
 
 ``` json
 {
-    "where": {
-        "eq": {
-            "name": "myname"
+    "where": [
+	    {
+	        "$eq": {
+	            "name": "myname"
+	        }
         },
-        "operator": "Or",
-        "eq": {
-            "name": "yourname"
+        {
+	        "$operator": "Or"
+	    },
+	    {
+	        "$eq": {
+	            "name": "yourname"
+	        }
         }
-    }
+    ]
 }
 ```
 
@@ -392,11 +422,13 @@ LIMIT 5
 
 ``` json
 {
-    "where": {
-      "in": {
-        "id": [20,30]
+    "where": [
+      {
+	      "$in": {
+	        "id": [20,30]
+	      }
       }
-    }
+    ]
 }
 ```
 
@@ -407,11 +439,13 @@ WHERE id IN (20,30)
 
 ``` json
 {
-    "where": {
-      "in": {
-        "name": ["Name1", "Name2"]
+    "where": [
+	  {
+	      "$in": {
+	        "name": ["Name1", "Name2"]
+	      }
       }
-    }
+    ]
 }
 ```
 
@@ -424,11 +458,13 @@ WHERE id IN ("Name1", "Name2")
 
 ``` json
 {
-    "where": {
-      "nin": {
-        "id": [20,30]
+    "where": [
+	  {
+	      "$nin": {
+	        "id": [20,30]
+	      }
       }
-    }
+    ]
 }
 ```
 
@@ -439,11 +475,13 @@ WHERE id NOT IN (20, 30)
 
 ``` json
 {
-    "where": {
-     "nin": {
-        "name": ["Name1", "Name2"]
+    "where": [
+      {
+	      "$nin": {
+	        "name": ["Name1", "Name2"]
+	      }
       }
-    }
+    ]
 }
 ```
 
@@ -456,11 +494,13 @@ WHERE id NOT IN ("Name1", "Name2")
 
 ``` json
 {
-    "where": {
-      "between": {
-        "id": [20,30]
+    "where": [
+	  {
+	      "$between": {
+	        "id": [20,30]
+	      }
       }
-    }
+    ]
 }
 ```
 
@@ -473,11 +513,13 @@ WHERE id BETWEEN 20 AND 30
 
 ``` json
 {
-    "where": {
-        "like": {
-            "name": "%na%"
+    "where": [
+	    {
+	        "$like": {
+	            "name": "%na%"
+	        }
         }
-    }
+    ]
 }
 ```
 

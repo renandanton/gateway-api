@@ -1,7 +1,9 @@
 {
-  "where": {
-    "like": {
-        "name": "%na%"
+  "where": [
+    {
+      "$like": {
+          "name": "%na%"
+      }
     }
-  }
+  ]
 }

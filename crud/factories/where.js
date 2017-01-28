@@ -16,30 +16,34 @@ module.exports.parse = function (object) {
 
   for(var key in object) {
 
-    if (String(key).toLowerCase() == "operator") {
-      statement += operator.parse(object[key]);
-    } else if (String(key).toLowerCase() == "in") {
-      statement += inn.parse(object[key]);
-    } else if (String(key).toLowerCase() == "nin") {
-      statement += nin.parse(object[key]);
-    } else if (String(key).toLowerCase() == "like") {
-      statement += like.parse(object[key]);
-    } else if (String(key).toLowerCase() == "between") {
-      statement += between.parse(object[key]);
-    } else if (String(key).toLowerCase() == "gt") {
-      statement += gt.parse(object[key]);
-    } else if (String(key).toLowerCase() == "gte") {
-      statement += gte.parse(object[key]);
-    } else if (String(key).toLowerCase() == "lt") {
-      statement += lt.parse(object[key]);
-    } else if (String(key).toLowerCase() == "lte") {
-      statement += lte.parse(object[key]);
-    } else if (String(key).toLowerCase() == "neq") {
-      statement += neq.parse(object[key]);
-    } else if (String(key).toLowerCase() == "eq") {
-      statement += eq.parse(object[key]);
-    } else {
-      statement += property.parse(key, object);
+    for (var name in object[key]) {
+
+        if (String(name).toLowerCase() == "$operator") {
+          statement += operator.parse(object[key][name]);
+        } else if (String(name).toLowerCase() == "$in") {
+          statement += inn.parse(object[key][name]);
+        } else if (String(name).toLowerCase() == "$nin") {
+          statement += nin.parse(object[key][name]);
+        } else if (String(name).toLowerCase() == "$like") {
+          statement += like.parse(object[key][name]);
+        } else if (String(name).toLowerCase() == "$between") {
+          statement += between.parse(object[key][name]);
+        } else if (String(name).toLowerCase() == "$gt") {
+          statement += gt.parse(object[key][name]);
+        } else if (String(name).toLowerCase() == "$gte") {
+          statement += gte.parse(object[key][name]);
+        } else if (String(name).toLowerCase() == "$lt") {
+          statement += lt.parse(object[key][name]);
+        } else if (String(name).toLowerCase() == "$lte") {
+          statement += lte.parse(object[key][name]);
+        } else if (String(name).toLowerCase() == "$neq") {
+          statement += neq.parse(object[key][name]);
+        } else if (String(name).toLowerCase() == "$eq") {
+          statement += eq.parse(object[key][name]);
+        } else {
+          statement += property.parse(name, object[key]);
+        }
+
     }
 
   }
