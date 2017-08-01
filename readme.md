@@ -232,7 +232,7 @@ SELECT name, email, created_at, updated_at FROM users WHERE id = 30
     "where": [
 	    {
 	        "name": "myname"
-        }
+      }
     ]
 }
 ```
@@ -246,7 +246,7 @@ WHERE name = 'myname'
 {
     "where": [
 	    {
-	        "eq": {
+	        "$eq": {
 	            "name": "myname"
 	        }
         }
@@ -265,7 +265,7 @@ WHERE name = 'myname'
 {
     "where": [
 	    {
-	        "gt": {
+	        "$gt": {
 	            "id": 15
 	        }
         }  
@@ -284,7 +284,7 @@ WHERE id > 20
 {
     "where": [
 	    {
-	        "gte": {
+	        "$gte": {
 	            "id": 19
 	        }
         }  
@@ -303,7 +303,7 @@ WHERE id >= 19
 {
     "where": [
 	    {
-	        "lt": {
+	        "$lt": {
 	            "id": 17
 	        }
         }  
@@ -322,7 +322,7 @@ WHERE id < 17
 {
     "where": [
 	    {
-	        "lte": {
+	        "$lte": {
 	            "id": 19
 	        }
         }  
@@ -341,15 +341,15 @@ WHERE id <= 19
 {
     "where": [
 	    {
-	        "eq": {
+	        "$eq": {
 	            "name": "myname"
 	        }
         },
         {
-	        "operator": "And"
+	        "$operator": "And"
 	    },
 	    {
-	        "eq": {
+	        "$eq": {
 	            "email": "myemail@example.com"
 	        }
         }
@@ -639,7 +639,7 @@ SELECT u.name,u.email,u.msisdn FROM users as u RIGHT JOIN signatures as s on s.u
         "u.role_id"
     ],
     "having": {
-        "gte": {
+        "$gte": {
             "COUNT(u.id)": 6
         }
     }

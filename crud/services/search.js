@@ -43,16 +43,16 @@ var Service = function (req, res, next) {
     if (order) sql += factoryOrder.parse(order);
     if (limit) sql += factoryLimit.parse(limit);
 
-    console.log(sql);
-
     if (query) {
       req.getConnection(function (err, conn) {
         conn.query(sql, function (err, results) {
             if(err) return res.status(500).json(err);
             results = results.length == 1 ? results[0] : results;
             if (cached != "false") {
-              cache.set(md5(JSON.stringify(req.body)), JSON.stringify(results));
-              console.log('guardou o cache ....');
+              var key = md5(JSON.stringify(req.body));
+              cache.set(key, JSON.stringify(results));
+              cache.expireat(key, 10);
+              console.log('cache kept..');
             }
             return res.status(200).json(results);
         });

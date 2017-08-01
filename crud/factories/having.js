@@ -11,19 +11,19 @@ module.exports.parse = function (object) {
 
   for(var key in object) {
 
-    if (String(key).toLowerCase() == "operator") {
+    if (String(key).toLowerCase() == "$operator") {
       statement += operator.parse(object[key]);
-    } else if (String(key).toLowerCase() == "gt") {
+    } else if (String(key).toLowerCase() == "$gt") {
       statement += gt.parse(object[key]);
-    } else if (String(key).toLowerCase() == "gte") {
+    } else if (String(key).toLowerCase() == "$gte") {
       statement += gte.parse(object[key]);
-    } else if (String(key).toLowerCase() == "lt") {
+    } else if (String(key).toLowerCase() == "$lt") {
       statement += lt.parse(object[key]);
-    } else if (String(key).toLowerCase() == "lte") {
+    } else if (String(key).toLowerCase() == "$lte") {
       statement += lte.parse(object[key]);
-    } else if (String(key).toLowerCase() == "neq") {
+    } else if (String(key).toLowerCase() == "$neq") {
       statement += neq.parse(object[key]);
-    } else if (String(key).toLowerCase() == "eq") {
+    } else if (String(key).toLowerCase() == "$eq") {
       statement += eq.parse(object[key]);
     } else {
       statement += " "+ String(key) +" = ";
